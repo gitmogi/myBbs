@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style rel="stylesheet" type="text/css">
+*{
+	margin: 0px;
+	padding: 0px;
+}
+#container {
+  min-width: 1200px;
+}
+#content {
+  min-height: 850px;
+  width: 1140px;
+  margin: 0 auto;
+}
+#content>h2{
+	text-align: center;
+	margin: 100px auto 30px;
+}
+#content form{
+	width: 50%;
+	border: 1px solid black;
+	background-color: lightcyan;
+	margin: 0px auto;
+}
+#content form>div:nth-child(2){
+	width:100%;
+	height:60px;
+	
+}
+#content form>div:nth-child(3){
+	width:100%;
+	min-height:220px;
+}
+#content form>div:nth-child(4){
+	width:248px;
+	margin:0px auto;
+}
+#content form label{
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+#content form input{
+	width: 400px;
+	height: 25px;
+	margin-top: 30px;
+}
+#content form button{
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	margin: 5px 10px;
+}
+#content form>div:nth-child(3)>input{
+	height: 150px;
+	margin-top: 33px;
+}
+#header {
+  width: 1140px;
+  height: 35px;
+  /* background-color: lightgray; */
+  margin: 0 auto;
+  overflow: hidden;
+}
+#header a{
+	color:black;
+	text-decoration: none;
+}
+#header > h1 {
+  width: 100px;
+  height: 35px;
+  text-indent: -9999px;
+  float: left;
+  margin: 0;
+}
+#header button {
+  width: 100px;
+  height: 35px;
+  float: right;
+  border-style: none;
+  background-color: white;
+}
+#header button:hover {
+  background-color: lightgray;
+  color: white;
+  cursor: pointer;
+}
+#header>h1>a{
+	width:100px;
+	height:35px;
+	float:right;
+	background-color: pink;
+}
+#header>span{
+	width: 100px;
+	height: 35px;
+	text-align:right;
+	line-height: 35px;
+	float: right;
+	background-color: white;
+}
+#menu {
+  width: 1140px;
+  height: 35px;
+  background-color: lightcyan;
+  margin: 0 auto;
+}
+#menu ul {
+  width: 440px;
+  line-height: 35px;
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+}
+#menu a{
+	color:black;
+	text-decoration: none;
+}
+#menu li {
+  width: 100px;
+  margin: 0 5px;
+  float: left;
+}
+#menu li:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+#footer {
+  width: 1140px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: lightgray;
+  margin: 0 auto;
+}
+</style>
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var num=location.search.substr(location.search.indexOf('=')+1);
+	$.get('http://localhost:8080/myBbs/bbs/detail.do',{num:num},function(data){
+		$('#content h2').html(data.bbs[0].num+"번 게시물 수정 페이지");
+		$('#content form>input').val(data.bbs[0].num);
+		$('#content form div:nth-child(2) input').val(data.bbs[0].title);
+		$('#content form div:nth-child(3) input').val(data.bbs[0].contents);
+	},'json');
+	$('#content form').submit(function(){
+		var param={
+				num:$('#content input').eq(0).val()
+				,title:$('#content input').eq(1).val()
+				,contents:$('#content input').eq(2).val()
+		};
+		$.post('http://localhost:8080/myBbs/bbs/edit.do',$.param(param),function(){
+			location.href='list.html';
+		});
+		return false;
+	});
+});
+</script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>로고<a href="../index.html"></a></h1>
+			<a href="#"><button>회원가입</button></a>
+			<a href="#"><button>로그인</button></a>
+		</div>
+		<div id="menu">
+			<ul>
+				<a href="../index.html"><li>홈</li></a>
+				<a href="../intro.html"><li>오시는 길</li></a>
+				<a href="list.html"><li>게시판</li></a>
+				<a href="#"><li>등등..</li></a>
+			</ul>
+		</div>
+		<div id="content">
+			<h2>몇번 게시물 수정 페이지</h2>
+			<form method="post">
+				<input type="hidden" name="num" value="1"/>
+				<div>
+					<label for="title">제목</label>
+					<input type="text" id="title" name="title" value="title"/>
+				</div>
+				<div>
+					<label for="contents">내용</label>
+					<input type="text" id="contents" name="contents" value="contents"/>
+				</div>
+				<div>
+					<button type="submit">수   정</button>
+					<button type="reset">취   소</button>
+				</div>
+			</form>
+		</div>
+		<div id="footer">
+			<p>&copy; 2023. sucompany. All rights reserved.</p>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style rel="stylesheet" type="text/css">
+*{
+	margin: 0px;
+	padding: 0px;
+}
+#container {
+  min-width: 1200px;
+}
+#content {
+  min-height: 850px;
+  width: 1140px;
+  margin: 0 auto;
+}
+#content>h2{
+	text-align: center;
+	margin: 10px auto 30px;
+}
+#table{
+	width: 800px;
+	height:1000px;
+	margin: 0px auto;
+}
+#table>div:nth-child(2){
+	height:20px;
+}
+#thead{
+	width:100%;
+	height:35px;
+}
+#tbody{
+	width:100%;
+	height:35px;
+	margin-bottom: 2px;
+}
+#tbody a{
+	text-decoration: none;
+	color: black;
+}
+#table span{
+	overflow: hidden;
+	display: block;
+	width: 100px;
+	height:35px;
+	line-height: 35px;
+	text-align: center;
+	float: left;
+	border-bottom: 1px solid black;
+	padding: 0px 5px;
+}
+#table span+span{
+	width: 376px;
+}
+#table span+span+span{
+	width: 100px;
+}
+#table span+span+span+span{
+	width: 180px;
+}
+#content p{
+	width:100%;
+	height:50px;
+}
+#content p>a{
+	display: block;
+	width:100px;
+	height:35px;
+	line-height: 35px;
+	text-align: center;
+	margin: 10px auto;
+	color: black;
+	text-decoration: none;
+	background-color: lightcyan;
+}
+#content p>a:hover{
+	background-color: lightblue;
+}
+#header {
+  width: 1140px;
+  height: 35px;
+  /* background-color: lightgray; */
+  margin: 0 auto;
+  overflow: hidden;
+}
+#header a{
+	color:black;
+	text-decoration: none;
+}
+#header > h1 {
+  width: 100px;
+  height: 35px;
+  text-indent: -9999px;
+  float: left;
+  margin: 0;
+}
+#header button {
+  width: 100px;
+  height: 35px;
+  float: right;
+  border-style: none;
+  background-color: white;
+}
+#header button:hover {
+  background-color: lightgray;
+  color: white;
+  cursor: pointer;
+}
+#header>h1>a{
+	width:100px;
+	height:35px;
+	float:right;
+	background-color: pink;
+}
+#header>span{
+	width: 100px;
+	height: 35px;
+	text-align:right;
+	line-height: 35px;
+	float: right;
+	background-color: white;
+}
+#menu {
+  width: 1140px;
+  height: 35px;
+  background-color: lightcyan;
+  margin: 0 auto;
+}
+#menu ul {
+  width: 440px;
+  line-height: 35px;
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+}
+#menu a{
+	color:black;
+	text-decoration: none;
+}
+#menu li {
+  width: 100px;
+  margin: 0 5px;
+  float: left;
+}
+#menu li:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+#footer {
+  width: 1140px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: lightgray;
+  margin: 0 auto;
+}
+</style>
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$.getJSON('http://localhost:8080/myBbs/bbs/list.do',function(data){
+		data.bbs.forEach(function(ele){
+			$('<div id="tbody"></div>')
+				.append($('<span/>').html('<a href="detail.html?num='+ele.num+'">'+ele.num+'</a>'))
+				.append($('<span/>').html('<a href="detail.html?num='+ele.num+'">'+ele.title+'</a>'))
+				.append($('<span/>').html('<a href="detail.html?num='+ele.num+'">'+ele.id+'</a>'))
+				.append($('<span/>').html('<a href="detail.html?num='+ele.num+'">'+ele.date+'</a>'))
+				.appendTo('#table>div:nth-child(3)');
+		});
+	});
+});
+</script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>로고<a href="../index.html"></a></h1>
+			<a href="#"><button>회원가입</button></a>
+			<a href="#"><button>로그인</button></a>
+		</div>
+		<div id="menu">
+			<ul>
+				<a href="../index.html"><li>홈</li></a>
+				<a href="../intro.html"><li>오시는 길</li></a>
+				<a href="list.html"><li>게시판</li></a>
+				<a href="#"><li>등등..</li></a>
+			</ul>
+		</div>
+		<div id="content">
+			<h2>bbs list 페이지</h2>
+			<div id="table">
+				<div id="thead">
+					<span>번호</span>
+					<span>제목</span>
+					<span>작성자</span>
+					<span>날짜</span>
+				</div>
+				<div></div>
+				<div></div>
+				<p><a href="add.html">입력</a></p>
+			</div>
+		</div>
+		<div id="footer">
+			<p>&copy; 2023. sucompany. All rights reserved.</p>
+		</div>
+	</div>
+</body>
+</html>
