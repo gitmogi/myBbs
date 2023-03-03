@@ -13,8 +13,8 @@ public class BitSql {
 	static {
 		driver="com.mysql.cj.jdbc.Driver";
 		url="jdbc:mysql://localhost:3306/lecture";
-		user=System.getenv("MYSQL_USER");
-		password=System.getenv("MYSQL_PW");
+		user="scott";
+		password="tiger";
 	}
 	
 	private BitSql(){}
