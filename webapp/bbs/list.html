@@ -161,7 +161,7 @@
 <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$.getJSON('http://localhost:8080/myBbs/bbs/list.do',function(data){
+	$.getJSON('http://192.168.99.100:8888/myBbs/bbs/list.do',function(data){
 		data.bbs.forEach(function(ele){
 			$('<div id="tbody"></div>')
 				.append($('<span/>').html('<a href="detail.html?num='+ele.num+'">'+ele.num+'</a>'))

@@ -167,7 +167,7 @@
 <script type="text/javascript">
 $(function(){
 	var num=location.search.substr(location.search.indexOf('=')+1);
-	$.get('http://localhost:8080/myBbs/bbs/detail.do',{num:num},function(data){
+	$.get('http://192.168.99.100:8888/myBbs/bbs/detail.do',{num:num},function(data){
 		$('#content h2').html(data.bbs[0].num+"번 게시물");
 		$('#content>div>div:nth-child(1)>span:last-child').html(data.bbs[0].id);
 		$('#content>div>div:nth-child(2)>span:last-child').html(data.bbs[0].title);
@@ -178,7 +178,7 @@ $(function(){
 		location.href='edit.html?num='+num;
 	});
 	$('#content a:last-child').click(function(){
-		$.post('http://localhost:8080/myBbs/bbs/del.do',{num:num},function(){
+		$.post('http://192.168.99.100:8888/myBbs/bbs/del.do',{num:num},function(){
 			location.href='list.html';
 		})
 	});

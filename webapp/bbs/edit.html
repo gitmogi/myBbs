@@ -144,7 +144,7 @@
 <script type="text/javascript">
 $(function(){
 	var num=location.search.substr(location.search.indexOf('=')+1);
-	$.get('http://localhost:8080/myBbs/bbs/detail.do',{num:num},function(data){
+	$.get('http://192.168.99.100:8888/myBbs/bbs/detail.do',{num:num},function(data){
 		$('#content h2').html(data.bbs[0].num+"번 게시물 수정 페이지");
 		$('#content form>input').val(data.bbs[0].num);
 		$('#content form div:nth-child(2) input').val(data.bbs[0].title);
@@ -156,7 +156,7 @@ $(function(){
 				,title:$('#content input').eq(1).val()
 				,contents:$('#content input').eq(2).val()
 		};
-		$.post('http://localhost:8080/myBbs/bbs/edit.do',$.param(param),function(){
+		$.post('http://192.168.99.100:8888/myBbs/bbs/edit.do',$.param(param),function(){
 			location.href='list.html';
 		});
 		return false;
